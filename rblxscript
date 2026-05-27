@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Scripts Landing Page</title>
+    <style>
+        /* Base Reset & Fonts */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0b0b;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        /* Container to match mobile screenshot look */
+        .container {
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+        }
+
+        h1 span.accent {
+            color: #ff3b30;
+        }
+
+        p.subtitle {
+            color: #8e8e93;
+            font-size: 1rem;
+            line-height: 1.4;
+            margin-bottom: 30px;
+        }
+
+        /* Badges / Pill Buttons */
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .badge {
+            background-color: #1c1c1e;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #eaeaea;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #2c2c2e;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .dot.red { background-color: #ff453a; }
+        .dot.orange { background-color: #ff9f0a; }
+        .dot.purple { background-color: #bf5af2; }
+
+        /* Section Divider */
+        .section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #8e8e93;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .section-title::before, .section-title::after {
+            content: "";
+            height: 1px;
+            width: 40px;
+            background-color: #2c2c2e;
+        }
+
+        /* Grid Card Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .card {
+            background-color: #121214;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: left;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 85px;
+        }
+
+        /* Left border accent highlights */
+        .card.adopt-me { border-left: 3px solid #ff453a; }
+        .card.mm2 { border-left: 3px solid #bf5af2; }
+        .card.brainrot { border-left: 3px solid #ff9f0a; }
+        .card.universal { border-left: 3px solid #30d158; }
+
+        .card-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .card-status {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #8e8e93;
+            text-transform: uppercase;
+        }
+
+        /* Live status green dot indicator */
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #30d158;
+            border-radius: 50%;
+            position: absolute;
+            right: 15px;
+            bottom: 15px;
+            box-shadow: 0 0 8px #30d158;
+        }
+
+        /* --- SCRIPT DELIVERY BOX SECTION --- */
+        .script-box {
+            background: #121214;
+            border: 1px solid #2c2c2e;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .script-box h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        /* Code display area */
+        .code-snippet {
+            background-color: #050505;
+            border: 1px solid #1c1c1e;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            color: #30d158;
+            overflow-x: auto;
+            white-space: nowrap;
+            margin-bottom: 15px;
+        }
+
+        /* Action button */
+        .btn-copy {
+            background-color: #ff3b30;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .btn-copy:hover {
+            background-color: #e03026;
+        }
+
+        /* Footer text */
+        .footer-text {
+            font-size: 0.8rem;
+            color: #636366;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Best <span class="accent">Adopt Me</span><br>Script 2026</h1>
+        <p class="subtitle">Most Famous and Used Script In Adopt me Scripts Also In Other Games</p>
+
+        <div class="badge-container">
+            <div class="badge"><span class="dot red"></span> Keyless</div>
+            <div class="badge"><span class="dot orange"></span> Undetected</div>
+            <div class="badge"><span class="dot purple"></span> Premium Features</div>
+        </div>
+
+        <div class="script-box">
+            <h3>Get the Script</h3>
+            <pre class="code-snippet" id="luaScript">loadstring(game:HttpGet("https://raw.githubusercontent.com/synx-hub/Overdrive-H/refs/heads/main/Loader.Lua"))()</pre>
+            <button class="btn-copy" onclick="copyScriptText()">Copy Script</button>
+        </div>
+
+        <div class="section-title">Games Supported</div>
+
+        <div class="grid">
+            <div class="card adopt-me">
+                <div class="card-title">Adopt Me</div>
+                <div class="card-status">Active</div>
+                <div class="status-dot"></div>
+            </div>
+            
+            <div class="card mm2">
+                <div class="card-title">Murder Mystery...</div>
+                <div class="card-status">Active</div>
+                <div class="status-dot"></div>
+            </div>
+
+            <div class="card brainrot">
+                <div class="card-title">Steal A Brainrot</div>
+                <div class="card-status">Active</div>
+                <div class="status-dot"></div>
+            </div>
+
+            <div class="card universal">
+                <div class="card-title">+ Many More</div>
+                <div class="card-status">Universal</div>
+                <div class="status-dot"></div>
+            </div>
+        </div>
+
+        <div class="footer-text">
+            <strong>50+</strong> games supported &nbsp;·&nbsp; universal script
+        </div>
+    </div>
+
+    <script>
+        function copyScriptText() {
+            var scriptText = document.getElementById("luaScript").innerText;
+            
+            navigator.clipboard.writeText(scriptText).then(function() {
+                var btn = document.querySelector(".btn-copy");
+                btn.innerText = "Copied to Clipboard!";
+                btn.style.backgroundColor = "#30d158";
+                
+                setTimeout(function() {
+                    btn.innerText = "Copy Script";
+                    btn.style.backgroundColor = "#ff3b30";
+                }, 2000);
+            }).catch(function(err) {
+                alert("Failed to copy script automatically.");
+            });
+        }
+    </script>
+
+</body>
+</html>
+            
