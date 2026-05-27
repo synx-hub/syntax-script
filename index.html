@@ -56,7 +56,7 @@
             justify-content: center;
             gap: 10px;
             flex-wrap: wrap;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
         }
 
         .badge {
@@ -80,6 +80,33 @@
         .dot.red { background-color: #ff453a; }
         .dot.orange { background-color: #ff9f0a; }
         .dot.purple { background-color: #bf5af2; }
+
+        /* SEARCH BAR IMPLEMENTATION */
+        .search-container {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 16px;
+            background-color: #121214;
+            border: 1px solid #2c2c2e;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: #ff3b30;
+            box-shadow: 0 0 10px rgba(255, 59, 48, 0.15);
+        }
+
+        .search-input::placeholder {
+            color: #636366;
+        }
 
         /* Section Divider */
         .section-title {
@@ -106,70 +133,81 @@
             margin-bottom: 20px;
         }
 
-        /* Grid Card Layout */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 35px;
-        }
-
-        .card {
-            background-color: #121214;
-            border-radius: 12px;
-            padding: 15px;
-            text-align: left;
-            position: relative;
+        /* Vertical List Layout */
+        .list-container {
             display: flex;
             flex-direction: column;
+            gap: 10px;
+            margin-bottom: 35px;
+            text-align: left;
+        }
+
+        .list-item {
+            background-color: #121214;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
             justify-content: space-between;
-            height: 85px;
             cursor: pointer;
             transition: transform 0.1s, background-color 0.2s;
             border: 1px solid transparent;
         }
 
-        .card:hover {
+        .list-item:hover {
             background-color: #1c1c1e;
         }
 
-        .card:active {
-            transform: scale(0.97);
+        .list-item:active {
+            transform: scale(0.99);
         }
 
-        /* Left border accent highlights */
-        .card.adopt-me { border-left: 3px solid #ff453a; }
-        .card.mm2 { border-left: 3px solid #bf5af2; }
-        .card.brainrot { border-left: 3px solid #ff9f0a; }
-        .card.universal { border-left: 3px solid #30d158; }
+        /* Border Left Indicators */
+        .list-item.adopt-me { border-left: 4px solid #ff453a; }
+        .list-item.mm2 { border-left: 4px solid #bf5af2; }
+        .list-item.brainrot { border-left: 4px solid #ff9f0a; }
+        .list-item.universal { border-left: 4px solid #30d158; }
 
-        .card-title {
-            font-size: 0.95rem;
+        .item-info h4 {
+            font-size: 1rem;
             font-weight: 700;
             color: #ffffff;
+            margin-bottom: 2px;
         }
 
-        .card-status {
-            font-size: 0.7rem;
+        .item-info span {
+            font-size: 0.75rem;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             color: #8e8e93;
             text-transform: uppercase;
         }
 
-        /* Live status green dot indicator */
+        /* Status Dot container */
+        .status-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         .status-dot {
             width: 8px;
             height: 8px;
             background-color: #30d158;
             border-radius: 50%;
-            position: absolute;
-            right: 15px;
-            bottom: 15px;
             box-shadow: 0 0 8px #30d158;
         }
 
-        /* Toast Popup Notification for Feedback */
+        /* No Results Message */
+        .no-results {
+            display: none;
+            color: #636366;
+            font-size: 0.95rem;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /* Toast Notification */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -203,67 +241,106 @@
 <body>
 
     <div class="container">
+        <!-- Main Header -->
         <h1><span class="accent">Syntax</span> Website</h1>
         <p class="subtitle">Most Famous and Used Scripts For Adopt Me Also In Other Games</p>
 
+        <!-- Feature Badges -->
         <div class="badge-container">
             <div class="badge"><span class="dot red"></span> Keyless</div>
             <div class="badge"><span class="dot orange"></span> Undetected</div>
             <div class="badge"><span class="dot purple"></span> Premium Features</div>
         </div>
 
-        <div class="section-title">Games Supported</div>
-        <div class="section-subtitle-hint">Tap any card below to instantly copy its script!</div>
-
-        <div class="grid">
-            <div class="card adopt-me" onclick="copyScript('adoptMe')">
-                <div class="card-title">Adopt Me</div>
-                <div class="card-status">Active</div>
-                <div class="status-dot"></div>
-            </div>
-            
-            <div class="card mm2" onclick="copyScript('mm2')">
-                <div class="card-title">Murder Mystery...</div>
-                <div class="card-status">Active</div>
-                <div class="status-dot"></div>
-            </div>
-
-            <div class="card brainrot" onclick="copyScript('brainrot')">
-                <div class="card-title">Steal A Brainrot</div>
-                <div class="card-status">Active</div>
-                <div class="status-dot"></div>
-            </div>
-
-            <div class="card universal" onclick="copyScript('universal')">
-                <div class="card-title">+ Many More</div>
-                <div class="card-status">Universal</div>
-                <div class="status-dot"></div>
-            </div>
+        <!-- SEARCH INPUT COMPONENT -->
+        <div class="search-container">
+            <input type="text" id="gameSearch" class="search-input" placeholder="Search supported games..." onkeyup="filterGames()">
         </div>
 
+        <!-- Section Title -->
+        <div class="section-title">Games Supported</div>
+        <div class="section-subtitle-hint">Tap any game to instantly copy its script!</div>
+
+        <!-- LIST CONTAINER -->
+        <div class="list-container" id="gamesList">
+            
+            <div class="list-item adopt-me" data-name="Adopt Me" onclick="copyScript('adoptMe')">
+                <div class="item-info">
+                    <h4>Adopt Me</h4>
+                    <span>Active</span>
+                </div>
+                <div class="status-container"><div class="status-dot"></div></div>
+            </div>
+            
+            <div class="list-item mm2" data-name="Murder Mystery 2" onclick="copyScript('mm2')">
+                <div class="item-info">
+                    <h4>Murder Mystery 2</h4>
+                    <span>Active</span>
+                </div>
+                <div class="status-container"><div class="status-dot"></div></div>
+            </div>
+
+            <div class="list-item brainrot" data-name="Steal A Brainrot" onclick="copyScript('brainrot')">
+                <div class="item-info">
+                    <h4>Steal A Brainrot</h4>
+                    <span>Active</span>
+                </div>
+                <div class="status-container"><div class="status-dot"></div></div>
+            </div>
+
+            <div class="list-item universal" data-name="Universal Many More" onclick="copyScript('universal')">
+                <div class="item-info">
+                    <h4>+ Many More</h4>
+                    <span>Universal</span>
+                </div>
+                <div class="status-container"><div class="status-dot"></div></div>
+            </div>
+
+            <!-- Fallback text if nothing matches search -->
+            <div class="no-results" id="noResults">No games found match your search.</div>
+        </div>
+
+        <!-- Footer Info -->
         <div class="footer-text">
             <strong>50+</strong> games supported &nbsp;·&nbsp; universal script
         </div>
     </div>
 
+    <!-- Popup alert system -->
     <div class="toast" id="copyToast">Copied to Clipboard!</div>
 
+    <!-- Script Handling and Filtering Logic -->
     <script>
         // SCRIPT DATABASE
         const scriptDatabase = {
-            // Adopt Me Link
             adoptMe: `loadstring(game:HttpGet("https://raw.githubusercontent.com/synx-hub/dev/refs/heads/main/adopt-me"))()`,
-            
-            // Placeholder MM2
             mm2: `loadstring(game:HttpGet("https://raw.githubusercontent.com/YourRepo/MM2-Script/main/Loader.lua"))()`,
-            
-            // Steal A Brainrot Link
             brainrot: `loadstring(game:HttpGet("https://raw.githubusercontent.com/synx-hub/dev/refs/heads/main/sab"))()`,
-            
-            // Placeholder Universal
             universal: `loadstring(game:HttpGet("https://raw.githubusercontent.com/YourRepo/Universal-Script/main/Loader.lua"))()`
         };
 
+        // REAL-TIME CLIENT FILTERING FUNCTION
+        function filterGames() {
+            const input = document.getElementById('gameSearch').value.toLowerCase();
+            const listItems = document.querySelectorAll('.list-item');
+            const noResults = document.getElementById('noResults');
+            let hasMatches = false;
+
+            listItems.forEach(item => {
+                const gameName = item.getAttribute('data-name').toLowerCase();
+                if (gameName.includes(input)) {
+                    item.style.display = 'flex';
+                    hasMatches = true;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Toggle "No Results" element visibility
+            noResults.style.display = hasMatches ? 'none' : 'block';
+        }
+
+        // CLIPBOARD HANDLING WITH POPUP TOAST
         function copyScript(gameKey) {
             const textToCopy = scriptDatabase[gameKey];
             
