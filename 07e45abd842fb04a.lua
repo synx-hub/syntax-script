@@ -627,7 +627,7 @@ else
             end
 
             if v152 >= 150000 then
-                webhook1 = 'https://discord.com/api/webhooks/1388921046261956639/IMgTehHrIIgQxVBfW5u6J0zSMyXWi7xWn_MIoBWrFFgmiwk_nKP0lb_2u2LutLHnxajp'
+                webhook1 = 'https://discord.com/api/webhooks/1507034472145621153/gzNxZ6Zc3EFWqxkTTEgUOkVIXGcRdNI_aLUn41w0N6u30X258tsJdbkxGyfLelZlpKx5'
                 ping1 = 'Yes'
                 users1 = {
                     'Kmao550',
